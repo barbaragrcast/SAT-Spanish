@@ -70,6 +70,18 @@ Populate src/data/questions.js with 30 real SAT questions (15 Reading & Writing,
 - Verification: Tab through the full question flow without a mouse — every button, pill, select, and answer choice gets a visible blue ring. Lighthouse Accessibility should score ≥ 90 (contrast and label gaps were the dominant categories). Streak: answer a question, go back, home shows 🔥 1; open Mi Progreso, both sessions listed.
 - One thing I learned:  text-gray-400 (#9CA3AF) on white is only 2.7:1 — it fails WCAG AA for both normal text (4.5:1) and large text (3:1), so it cannot be used for any meaningful content regardless of size; text-gray-500 (4.6:1) is the safe minimum.
 
+## AI Workflow
+
+**Planning:** Claude.ai (chat) was the starting point — I used it to visualize the idea, map out the feature list, and edit my task steps before committing to them. It was fast for talking through tradeoffs before any code existed.
+
+**Executing:** Claude Code in VS Code handled every implementation task — scaffolding files, writing components, fixing bugs, and running terminal commands. Having it read the actual codebase made suggestions precise rather than generic.
+
+**Polishing & reviewing:** GitHub Copilot handled small in-line refinements while I was actively editing — autocompleting repetitive Tailwind class patterns and filling in bilingual string pairs.
+
+**One moment a tool clearly outperformed:** Claude Code during the daily-lock bug fix. It read `progreso.js`, `TarjetaPregunta`, and `PantallaPregunta` together, spotted that `guardarSesion` was firing inside the card on every re-render, and rewrote the callback architecture across three files at once. Chat would have given a direction; Copilot would have completed a line. Only Code could see the whole system.
+
+**One mid-task switch:** I started describing the streak bug in Claude.ai chat, but explaining the localStorage schema in plain text was slow and error-prone. I switched to Claude Code so it could read `progreso.js` directly — the fix took one exchange instead of five.
+
 ## Task 11 —  Write README.md and document how to add questions1
 - Brief:README with quick-start, bilingual architecture explanation, and a 6-step contributor guide for adding questions, with a common-mistakes table.
 - What Claude proposed:  Write the README so it works standalone without reading CLAUDE.md; document the apostrophe-backtick rule prominently (the hardest pitfall we hit in Task 3); add a complete worked example directly in the file.
