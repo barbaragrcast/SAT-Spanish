@@ -70,21 +70,24 @@ Populate src/data/questions.js with 30 real SAT questions (15 Reading & Writing,
 - Verification: Tab through the full question flow without a mouse — every button, pill, select, and answer choice gets a visible blue ring. Lighthouse Accessibility should score ≥ 90 (contrast and label gaps were the dominant categories). Streak: answer a question, go back, home shows 🔥 1; open Mi Progreso, both sessions listed.
 - One thing I learned:  text-gray-400 (#9CA3AF) on white is only 2.7:1 — it fails WCAG AA for both normal text (4.5:1) and large text (3:1), so it cannot be used for any meaningful content regardless of size; text-gray-500 (4.6:1) is the safe minimum.
 
-## AI Workflow
-
-**Planning:** Claude.ai (chat) was the starting point — I used it to visualize the idea, map out the feature list, and edit my task steps before committing to them. It was fast for talking through tradeoffs before any code existed.
-
-**Executing:** Claude Code in VS Code handled every implementation task — scaffolding files, writing components, fixing bugs, and running terminal commands. Having it read the actual codebase made suggestions precise rather than generic.
-
-**Polishing & reviewing:** GitHub Copilot handled small in-line refinements while I was actively editing — autocompleting repetitive Tailwind class patterns and filling in bilingual string pairs.
-
-**One moment a tool clearly outperformed:** Claude Code during the daily-lock bug fix. It read `progreso.js`, `TarjetaPregunta`, and `PantallaPregunta` together, spotted that `guardarSesion` was firing inside the card on every re-render, and rewrote the callback architecture across three files at once. Chat would have given a direction; Copilot would have completed a line. Only Code could see the whole system.
-
-**One mid-task switch:** I started describing the streak bug in Claude.ai chat, but explaining the localStorage schema in plain text was slow and error-prone. I switched to Claude Code so it could read `progreso.js` directly — the fix took one exchange instead of five.
-
 ## Task 11 —  Write README.md and document how to add questions1
 - Brief:README with quick-start, bilingual architecture explanation, and a 6-step contributor guide for adding questions, with a common-mistakes table.
 - What Claude proposed:  Write the README so it works standalone without reading CLAUDE.md; document the apostrophe-backtick rule prominently (the hardest pitfall we hit in Task 3); add a complete worked example directly in the file.
 - What I changed before approving: : Added the worked example question (6266dc01, Zaha Hadid) directly to questions.js — this both proves the instructions work and leaves a real reference object contributors can copy-paste and modify.
 - Verification:  Ran Date.now().toString(16).slice(-8) exactly as Step 1 says → got 6266dc01 → pasted it into the template from Step 4 → build passes → Node confirms all 12 fields load correctly in both languages → 31 total questions, 16 R&W.
 - One thing I learned: Documenting the apostrophe rule visually is more useful than prose any contributor who misses the explanation will still catch it at a glance in the comparison block.
+
+## AI Workflow
+Planning → Claude.ai chat — visualize the idea, edit task steps before committing
+Executing → Claude Code in VS Code — all implementation, file edits, terminal commands
+Polishing → GitHub Copilot — inline autocomplete for Tailwind patterns and bilingual string pairs
+
+Tool that outperformed: Claude Code on the daily-lock bug — it read three files simultaneously and rewrote the callback architecture across all of them. Chat would have given a direction; Copilot would have completed a line.
+
+Mid-task switch: Started describing the streak bug in Claude.ai chat, but explaining the localStorage schema in plain text was too slow switched to Claude Code so it could read progreso.js directly.
+
+## Reflection
+1) The agentic workflow let me create something I wouldn't be able to ship alone in 4 hours. This is because, although my idea was great, I don't have the complete skills to create it by myself. For me, this would've been a month's project because I would have to learn many things from scratch. For example, I didn't know how to deal with time and create a streak that will keep track of that. 
+2) One part that I had to override Claude was when it made it so the user could answer the daily question multiple times. This messed up the purpose of the daily question, and it messed up the "progress" page, since that page will keep track of the questions you get right or wrong. A user could easily answer the same question right multiple times, and it would display an inaccurate percentage. I knew that the question should only be answered once, and then I stopped Claude and pointed out the mistake.
+3) This project revealed that even though AI is a powerful tool, human judgment is the key element here. Without proper guidance and constraints, the AI wouldn't be able to create the desired product. This way, we created an almost symbiotic relation, in which both would fill in what they know. As the head, you know the vision, how it's supposed to work, and the outline. On the other hand, the AI only knew the technical part and needed my tests and feedback to actually build the website. 
+4) This will help my workflow into my internship because it will allow me to create faster and be able to do something even though my skills aren't there yet. The 1st thing I will do on day one is use Claude to teach me the basics of any program and use it not to do my work but to guide me through it. At the end, my main goal is to learn, and by making AI do everything for me, it would defeat the purpose. Therefore, it is important to use it as a tool but not depend completely on it.
