@@ -6,4 +6,7 @@ export default defineConfig({
   server: {
     port: 5173,
   },
+  test: {
+    environment: 'node',   // default; individual files override with @vitest-environment
+  },
 });
